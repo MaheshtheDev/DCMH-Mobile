@@ -112,6 +112,7 @@ export default function DonationsScreen() {
           filteredHistory.length > 0 &&
           filteredHistory.map((item, index) => (
             <View
+              key={index}
               style={{
                 justifyContent: "space-between",
                 marginVertical: verticalScale(10),
