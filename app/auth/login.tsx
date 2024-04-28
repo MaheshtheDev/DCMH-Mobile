@@ -12,16 +12,14 @@ import { supabase } from "../lib/supabase";
 import { Link, router } from "expo-router";
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState<String>("");
-  const [password, setPassword] = useState<String>("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onSubmitLogin = () => {
     const fetchUser = async () => {
       const { error } = await supabase.auth.signInWithPassword({
-        // email: email,
-        // password: password,
-        email: "samratmalisetti@gmail.com",
-        password: "123456",
+        email: email,
+        password: password,
       });
       if (error) {
         Alert.alert(error.message);
