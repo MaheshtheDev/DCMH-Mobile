@@ -53,7 +53,9 @@ export default function DonationsScreen() {
       }
     };
 
-    fetchHistory();
+    if (history.length === 0) {
+      fetchHistory();
+    }
   });
 
   useEffect(() => {

@@ -45,9 +45,16 @@ export default function DonationsScreen() {
         Alert.alert("Error has occurred");
       }
       setHistory(data);
-      console.log(history, "HIstoryryryryry");
+      if (data?.length > 0) {
+        setFilteredHistory(
+          data.filter((item) => item.request_status === "pending")
+        );
+      }
     };
-    fetchHistory();
+
+    if (history.length === 0) {
+      fetchHistory();
+    }
   });
 
   useEffect(() => {
