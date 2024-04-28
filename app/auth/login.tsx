@@ -67,8 +67,8 @@ async function registerForPushNotificationsAsync() {
 }
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState<String>("");
-  const [password, setPassword] = useState<String>("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   async function getToken(): Promise<string> {
     const { status: existingStatus } =
