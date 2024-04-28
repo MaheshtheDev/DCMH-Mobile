@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import { View } from "react-native";
 import { DCText } from "@/components/DCText";
 import {
@@ -7,11 +7,17 @@ import {
   horizontalScale,
   verticalScale,
 } from "@/styles";
-import { Feather, Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Feather,
+  Fontisto,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { DCButton } from "@/components/DCButton";
 import * as WebBrowser from "expo-web-browser";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { router } from "expo-router";
+import * as Linking from "expo-linking";
 
 export default function TabTwoScreen() {
   return (
@@ -22,7 +28,6 @@ export default function TabTwoScreen() {
           flexDirection: "row",
           paddingVertical: verticalScale(10),
           paddingHorizontal: horizontalScale(10),
-          backgroundColor: "lightblue",
           marginVertical: verticalScale(10),
           marginHorizontal: horizontalScale(10),
           borderRadius: 5,
@@ -70,7 +75,7 @@ export default function TabTwoScreen() {
 
       <View
         style={{
-          marginHorizontal: horizontalScale(20),
+          marginHorizontal: horizontalScale(10),
           marginVertical: verticalScale(10),
         }}
       >
@@ -83,48 +88,78 @@ export default function TabTwoScreen() {
         >
           More Options
         </DCText>
-        <DCButton
-          title="Board of Directors"
-          buttonStyle={{
-            paddingVertical: verticalScale(2),
-          }}
-          textStyle={{
-            textDecorationLine: "underline",
-          }}
+        <Pressable
+          style={styles.navBg}
           onPress={() => {
             WebBrowser.openBrowserAsync(
               "https://daviscommunitymeals.org/board-of-directors/"
             );
           }}
-        />
-        <DCButton
-          title="Staff"
-          buttonStyle={{
-            paddingVertical: verticalScale(2),
-          }}
-          textStyle={{
-            textDecorationLine: "underline",
-          }}
+        >
+          <DCText
+            textStyle={{
+              color: "black",
+              fontFamily: NunitoSansSemiBold,
+            }}
+          >
+            Board of Directors
+          </DCText>
+          <AntDesign name="arrowright" size={24} color="black" />
+        </Pressable>
+        <Pressable
+          style={styles.navBg}
           onPress={() => {
             WebBrowser.openBrowserAsync(
               "https://daviscommunitymeals.org/staff/"
             );
           }}
-        />
-        <DCButton
-          title="News"
-          buttonStyle={{
-            paddingVertical: verticalScale(2),
-          }}
-          textStyle={{
-            textDecorationLine: "underline",
-          }}
+        >
+          <DCText
+            textStyle={{
+              color: "black",
+              fontFamily: NunitoSansSemiBold,
+            }}
+          >
+            Staff
+          </DCText>
+          <AntDesign name="arrowright" size={24} color="black" />
+        </Pressable>
+        <Pressable
+          style={styles.navBg}
           onPress={() => {
             WebBrowser.openBrowserAsync(
-              "https://daviscommunitymeals.org/news/"
+              "https://daviscommunitymeals.org/board-of-directors/"
             );
           }}
-        />
+        >
+          <DCText
+            textStyle={{
+              color: "black",
+              fontFamily: NunitoSansSemiBold,
+            }}
+          >
+            News
+          </DCText>
+          <AntDesign name="arrowright" size={24} color="black" />
+        </Pressable>
+        <Pressable
+          style={styles.navBg}
+          onPress={() => {
+            Linking.openURL(
+              "https://interland3.donorperfect.net/weblink/weblink.aspx?name=E357416&id=1"
+            );
+          }}
+        >
+          <DCText
+            textStyle={{
+              color: "black",
+              fontFamily: NunitoSansSemiBold,
+            }}
+          >
+            Donate to DCMH
+          </DCText>
+          <AntDesign name="arrowright" size={24} color="black" />
+        </Pressable>
         <DCButton
           title="Logout"
           buttonStyle={{
@@ -189,5 +224,15 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  navBg: {
+    marginVertical: verticalScale(5),
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: horizontalScale(10),
+    borderRadius: 5,
+    backgroundColor: "lightgrey",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });

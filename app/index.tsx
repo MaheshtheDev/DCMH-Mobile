@@ -16,7 +16,7 @@ import {
   verticalScale,
 } from "@/styles";
 import { Images } from "@/assets/images";
-import { supabase } from "./lib/supabase";
+import { supabase } from "../lib/supabase";
 import { Session } from "@supabase/supabase-js";
 import { LinearTextGradient } from "react-native-text-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
@@ -234,7 +234,7 @@ export default function index() {
           router.push("/auth/login");
         }}
         buttonStyle={{
-          backgroundColor: "black",
+          backgroundColor: "green",
           borderRadius: 100,
           padding: 10,
           margin: 10,

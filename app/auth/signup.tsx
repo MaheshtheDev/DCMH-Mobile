@@ -7,8 +7,15 @@ import {
   verticalScale,
 } from "@/styles";
 import React, { useState } from "react";
-import { Alert, SafeAreaView, ScrollView, StyleSheet, TextInput, View } from "react-native";
-import { supabase } from "../lib/supabase";
+import {
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
+import { supabase } from "../../lib/supabase";
 import { router } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -17,7 +24,7 @@ export default function signUpScreen() {
   const [lastName, setLastName] = useState<String>("");
   const [email, setEmail] = useState<String>("");
   const [password, setPassword] = useState<String>("");
-  const [phoneNumber, setPhoneNumber] = useState<Number>();
+  const [phoneNumber, setPhoneNumber] = useState();
   const [imageUri, setImageUri] = useState<String>("");
   const [loading, setLoading] = useState<Boolean>(false);
 
@@ -48,6 +55,13 @@ export default function signUpScreen() {
 
   async function signUpWithEmail() {
     setLoading(true);
+    if (phoneNumber && phoneNumber.length !== 10) {
+      Alert.alert(
+        "Invalid phone number",
+        "Please enter a valid 10-digit phone number."
+      );
+      return;
+    }
     const {
       data: { session },
       error,

@@ -7,7 +7,7 @@ import {
 } from "@/styles";
 import { useEffect, useState } from "react";
 import { Alert, Pressable, StyleSheet, View } from "react-native";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function DonationsScreen() {

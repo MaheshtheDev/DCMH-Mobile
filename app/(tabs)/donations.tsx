@@ -8,7 +8,7 @@ import {
 } from "@/styles";
 import { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 
 export default function DonationsScreen() {
   const [selectedTab, setSelectedTab] = useState(0);

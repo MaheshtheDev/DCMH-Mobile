@@ -15,7 +15,7 @@ import { Text, View } from "react-native";
 import { Images } from "@/assets/images";
 import { Entypo, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { supabase } from "./lib/supabase";
+import { supabase } from "../lib/supabase";
 import { DCButton } from "@/components/DCButton";
 
 export type ProductDetails = {
@@ -87,14 +87,19 @@ export default function ModalScreen() {
                     console.log("Error updating inventory");
                     return;
                   } else {
-                    router.back();
-                    Alert.alert("Inventory updated successfully");
+                    //router.back();
                   }
                 }
-                updateInventory();
 
                 //TODO: Push notification to all donors
                 async function pushNotification() {
+                  if (
+                    productDetails.available_quantity /
+                      productDetails.max_quantity >
+                    0.5
+                  ) {
+                    return;
+                  }
                   const { data, error } = await supabase
                     .from("profiles")
                     .select("auth_token")
@@ -126,6 +131,13 @@ export default function ModalScreen() {
                     });
                   });
                 }
+
+                Promise.all([updateInventory(), pushNotification()]).then(
+                  () => {
+                    router.back();
+                    Alert.alert("Inventory updated successfully");
+                  }
+                );
               }}
               buttonStyle={{
                 backgroundColor: "black",

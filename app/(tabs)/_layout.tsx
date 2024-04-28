@@ -23,7 +23,6 @@ export default function TabLayout() {
         },
       }}
     >
-      <StatusBar barStyle={"dark-content"} />
       <Tabs.Screen
         name="index"
         options={{

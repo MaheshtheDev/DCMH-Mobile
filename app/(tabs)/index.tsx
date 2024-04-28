@@ -8,7 +8,7 @@ import { NunitoSans10ptBold, horizontalScale, verticalScale } from "@/styles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { FlashList } from "@shopify/flash-list";
 import { DCButton } from "@/components/DCButton";
 import React from "react";

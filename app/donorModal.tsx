@@ -1,7 +1,7 @@
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { supabase } from "./lib/supabase";
+import { supabase } from "../lib/supabase";
 import { Entypo, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import {
   NunitoSans,

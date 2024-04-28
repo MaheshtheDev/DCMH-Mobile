@@ -5,7 +5,7 @@ import { Image } from "expo-image";
 import { DCText } from "@/components/DCText";
 import { NunitoSansSemiBold, horizontalScale, verticalScale } from "@/styles";
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { FlashList } from "@shopify/flash-list";
 
 export default function DonorsScreen() {

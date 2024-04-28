@@ -1,4 +1,4 @@
-import { Button, Pressable, StyleSheet } from "react-native";
+import { Button, Pressable, SafeAreaView, StyleSheet } from "react-native";
 import { View } from "react-native";
 import { DCText } from "@/components/DCText";
 import {
@@ -15,7 +15,7 @@ import {
 } from "@expo/vector-icons";
 import { DCButton } from "@/components/DCButton";
 import * as WebBrowser from "expo-web-browser";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import * as Linking from "expo-linking";
@@ -36,7 +36,7 @@ export default function SettingsScreen() {
 
   return (
     user && (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View
           id="profile tile"
           style={{
@@ -224,7 +224,7 @@ export default function SettingsScreen() {
             }}
           />
         </View>
-      </View>
+      </SafeAr>
     )
   );
 }
@@ -252,6 +252,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    
   },
 });
