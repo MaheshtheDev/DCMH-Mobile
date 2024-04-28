@@ -7,7 +7,13 @@ import * as Notifications from "expo-notifications";
 import { Button, SafeAreaView, View, Text, StyleSheet } from "react-native";
 import { DCText } from "@/components/DCText";
 import { DCButton } from "@/components/DCButton";
-import { NunitoSans10ptBold, NunitoSansBold, NunitoSansExtraBold, verticalScale } from "@/styles";
+import {
+  horizontalScale,
+  NunitoSans10ptBold,
+  NunitoSansBold,
+  NunitoSansExtraBold,
+  verticalScale,
+} from "@/styles";
 
 ErrorUtils.setGlobalHandler((error, isFatal) => {
   // Handle the error
@@ -52,7 +58,7 @@ export default function index() {
     <SafeAreaView
       style={{
         marginVertical: verticalScale(20),
-        marginHorizontal: verticalScale(15),
+        marginHorizontal: horizontalScale(15),
       }}
     >
       <View>
@@ -75,7 +81,9 @@ export default function index() {
       </View>
       <DCButton
         title="LET'S MAKE CHANGE"
-        onPress={() => {}}
+        onPress={() => {
+          router.push("/auth/login");
+        }}
         buttonStyle={{
           backgroundColor: "black",
           borderRadius: 100,
