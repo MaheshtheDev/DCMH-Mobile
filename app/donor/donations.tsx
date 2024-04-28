@@ -45,9 +45,12 @@ export default function DonationsScreen() {
       if (error) {
         Alert.alert("Error has occurred");
       }
-
-      console.log(data, "Donations data");
       setHistory(data);
+      if (data?.length > 0) {
+        setFilteredHistory(
+          data.filter((item) => item.request_status === "pending")
+        );
+      }
     };
 
     fetchHistory();
@@ -59,7 +62,6 @@ export default function DonationsScreen() {
         history.filter((item) => item.request_status === "pending")
       );
     } else {
-      // have the completed data
       setFilteredHistory(
         history.filter((item) => item.request_status === "approve")
       );
@@ -125,9 +127,15 @@ export default function DonationsScreen() {
                 {item.inventory_name}
               </DCText>
               <View>
-                <DCText>{"Need Description to be displayed here."}</DCText>
-                <DCText>Donor Contact: {item.donor_phone}</DCText>
-                <DCText>Ordered Quantity: {item.quantity_ordered}</DCText>
+                <DCText>
+                  {
+                    "You have been donated 100 bottles of water lots in 2 months period of time."
+                  }
+                </DCText>
+                {/* <DCText>Donor Contact: {item.donor_phone}</DCText> */}
+                <DCText>
+                  Previous Order Quantity: {item.quantity_ordered}
+                </DCText>
               </View>
               <View
                 style={{
@@ -138,21 +146,23 @@ export default function DonationsScreen() {
               >
                 {selectedTab == 0 && (
                   <Pressable
-                    onPress={Alert.alert(
-                      "You wanna accept donation?",
-                      "Recieving a donation",
-                      [
-                        {
-                          text: "Accept",
-                          onPress: () => onSubmit(item.inventory_id),
-                        },
-                        {
-                          text: "Cancel",
-                          onPress: () => {},
-                          style: "cancel",
-                        },
-                      ]
-                    )}
+                    onPress={() =>
+                      Alert.alert(
+                        "You wanna accept donation?",
+                        "Recieving a donation",
+                        [
+                          {
+                            text: "Accept",
+                            onPress: () => onSubmit(item.inventory_id),
+                          },
+                          {
+                            text: "Cancel",
+                            onPress: () => {},
+                            style: "cancel",
+                          },
+                        ]
+                      )
+                    }
                     style={styles.receivedButton}
                   >
                     <AntDesign name="checkcircle" size={20} color="white" />
@@ -168,21 +178,23 @@ export default function DonationsScreen() {
                 )}
                 {selectedTab == 0 && (
                   <Pressable
-                    onPress={Alert.alert(
-                      "You wanna accept donation?",
-                      "Recieving a donation",
-                      [
-                        {
-                          text: "Accept",
-                          onPress: () => onSubmit(item.inventory_id),
-                        },
-                        {
-                          text: "Cancel",
-                          onPress: () => {},
-                          style: "cancel",
-                        },
-                      ]
-                    )}
+                    onPress={() =>
+                      Alert.alert(
+                        "You wanna accept donation?",
+                        "Recieving a donation",
+                        [
+                          {
+                            text: "Accept",
+                            onPress: () => onSubmit(item.inventory_id),
+                          },
+                          {
+                            text: "Cancel",
+                            onPress: () => {},
+                            style: "cancel",
+                          },
+                        ]
+                      )
+                    }
                     style={styles.cancelOrderButton}
                   >
                     <AntDesign name="closecircle" size={20} color="white" />
