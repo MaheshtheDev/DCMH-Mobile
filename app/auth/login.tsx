@@ -5,7 +5,7 @@ import { horizontalScale, verticalScale } from "@/styles/metrics";
 import React, { useEffect, useState } from "react";
 import { Alert, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { supabase } from "../lib/supabase";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 export default function loginScreen() {
   const [email, setEmail] = useState<String>("");
@@ -24,8 +24,7 @@ export default function loginScreen() {
       if (data?.length == 0) {
         Alert.alert("User Not Found! Please SignUp");
       } else {
-        // TODO - redirect to the Home Page...
-        Alert.alert("Login Success !");
+        router.push("/(tabs)/");
       }
     };
     fetchUser();

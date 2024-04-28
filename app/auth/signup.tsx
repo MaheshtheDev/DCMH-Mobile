@@ -42,31 +42,13 @@ export default function signUpScreen() {
   return (
     <SafeAreaView
       style={{
-        marginVertical: verticalScale(20),
-        marginHorizontal: horizontalScale(15),
+        paddingVertical: verticalScale(20),
+        paddingHorizontal: horizontalScale(15),
         flex: 1,
         flexDirection: "column",
+        backgroundColor: "white",
       }}
     >
-      <View
-        style={{
-          flexDirection: "column",
-          alignItems: "center",
-          paddingLeft: 10,
-          marginBottom: 5,
-        }}
-      >
-        <DCText
-          textStyle={{
-            fontSize: 20,
-            fontFamily: NunitoSans10ptBold,
-            textAlign: "auto",
-            color: "green",
-          }}
-        >
-          Davis Community Meals & Housing
-        </DCText>
-      </View>
       <View style={styles.container}>
         <View>
           <View style={styles.fieldInputs}>

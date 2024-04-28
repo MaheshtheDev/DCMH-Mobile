@@ -9,7 +9,10 @@ export default function authLayout() {
       <StatusBar barStyle={"default"} />
       <Stack>
         <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="signup" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="signup"
+          options={{ title: "SignUp", headerBackTitle: "", headerBackTitleVisible: false }}
+        />
       </Stack>
     </SafeAreaProvider>
   );
