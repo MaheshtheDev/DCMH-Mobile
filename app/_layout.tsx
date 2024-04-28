@@ -54,8 +54,12 @@ function RootLayoutNav() {
     <SafeAreaProvider>
       <StatusBar barStyle={"default"} />
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="index"
+          options={{ headerShown: false, headerBackButtonMenuEnabled: false }}
+        />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="donor" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
         <Stack.Screen name="auth" options={{ headerShown: false }} />
       </Stack>

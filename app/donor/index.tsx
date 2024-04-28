@@ -14,7 +14,7 @@ import { FlashList } from "@shopify/flash-list";
 import { DCButton } from "@/components/DCButton";
 import React from "react";
 
-export default function TabOneScreen() {
+export default function DonorsHomeScreen() {
   const router = useRouter();
 
   const [inventory, setInventory] = useState([]);
@@ -34,8 +34,6 @@ export default function TabOneScreen() {
       } = await supabase.auth.getUser();
       let metadata = user.user_metadata;
 
-      console.log("meta dat");
-      console.log(metadata);
     };
     fetchUserData();
     const fetchInventory = async () => {

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useRouter } from "expo-router";
 import * as Notifications from "expo-notifications";
@@ -18,6 +18,8 @@ import {
 import { Images } from "@/assets/images";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
+import { supabase } from "./lib/supabase";
+import { Session } from "@supabase/supabase-js";
 
 ErrorUtils.setGlobalHandler((error, isFatal) => {
   // Handle the error
@@ -38,25 +40,22 @@ Notifications.setNotificationHandler({
  */
 export default function index() {
   const router = useRouter();
-  //  const resetStore = useUserStore((state) => state.reset);
 
-  //  useEffect(() => {
-  //    const checkToken = async () => {
-  //      await TempStorage.getItem(TempStorageKeys.AUTH_TOKEN).then((token) => {
-  //        if (token) {
-  //          router.push({
-  //            pathname: "/home",
-  //            params: {
-  //              fetch: 1,
-  //            },
-  //          });
-  //        } else {
-  //          resetStore();
-  //        }
-  //      });
-  //    };
-  //    checkToken();
-  //  });
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    if(session) {
+      router.push("/(tabs)/");
+    }
+  }, []);
 
   return (
     <SafeAreaView

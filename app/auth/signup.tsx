@@ -1,10 +1,16 @@
 import { DCButton } from "@/components/DCButton";
 import { DCText } from "@/components/DCText";
-import { horizontalScale, NunitoSans10ptBold, NunitoSansMedium, verticalScale } from "@/styles";
+import {
+  horizontalScale,
+  NunitoSans10ptBold,
+  NunitoSansMedium,
+  verticalScale,
+} from "@/styles";
 import React, { useState } from "react";
-import { Alert, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
+import { Alert, SafeAreaView, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import { supabase } from "../lib/supabase";
 import { router } from "expo-router";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function signUpScreen() {
   const [firstName, setFirstName] = useState<String>("");
@@ -13,6 +19,7 @@ export default function signUpScreen() {
   const [password, setPassword] = useState<String>("");
   const [phoneNumber, setPhoneNumber] = useState<Number>();
   const [imageUri, setImageUri] = useState<String>("");
+  const [loading, setLoading] = useState<Boolean>(false);
 
   const onSignUp = () => {
     const createUser = async () => {
@@ -39,6 +46,31 @@ export default function signUpScreen() {
     router.push("/auth/login");
   };
 
+  async function signUpWithEmail() {
+    setLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          isAdmin: false,
+        },
+      },
+    });
+
+    if (error) Alert.alert(error.message);
+    if (!session)
+      Alert.alert("Please check your inbox for email verification!");
+
+    router.push("/auth/login");
+    setLoading(false);
+  }
+
   return (
     <SafeAreaView
       style={{
@@ -49,7 +81,7 @@ export default function signUpScreen() {
         backgroundColor: "white",
       }}
     >
-      <View style={styles.container}>
+      <KeyboardAwareScrollView style={styles.container}>
         <View>
           <View style={styles.fieldInputs}>
             <DCText
@@ -116,6 +148,8 @@ export default function signUpScreen() {
               keyboardType="numeric"
               onChangeText={(e) => setPhoneNumber(e)}
               placeholder="Enter your phone number"
+              returnKeyLabel="Done"
+              returnKeyType="done"
             />
           </View>
           {/*<View style={styles.fieldInputs}>
@@ -134,7 +168,7 @@ export default function signUpScreen() {
         </View>
         <DCButton
           title="Sign Up"
-          onPress={() => onSignUp()}
+          onPress={() => signUpWithEmail()}
           buttonStyle={{
             backgroundColor: "green",
             borderRadius: 100,
@@ -148,7 +182,7 @@ export default function signUpScreen() {
             fontFamily: NunitoSans10ptBold,
           }}
         />
-      </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
@@ -157,7 +191,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "space-between",
   },
   fieldInputs: {
     flexDirection: "column",

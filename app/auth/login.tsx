@@ -1,6 +1,10 @@
 import { DCButton } from "@/components/DCButton";
 import { DCText } from "@/components/DCText";
-import { NunitoSans10ptBold, NunitoSansLight, NunitoSansMedium } from "@/styles";
+import {
+  NunitoSans10ptBold,
+  NunitoSansLight,
+  NunitoSansMedium,
+} from "@/styles";
 import { horizontalScale, verticalScale } from "@/styles/metrics";
 import React, { useEffect, useState } from "react";
 import { Alert, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
@@ -13,19 +17,23 @@ export default function LoginScreen() {
 
   const onSubmitLogin = () => {
     const fetchUser = async () => {
-      let { data, error } = await supabase
-        .from("users")
-        .select("*")
-        .eq("email_id", email)
-        .eq("password", password);
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
       if (error) {
-        Alert.alert("Error found !!");
-      }
-      console.log(data);
-      if (data?.length == 0) {
-        Alert.alert("User Not Found! Please SignUp");
+        Alert.alert(error.message);
       } else {
-        router.push("/(tabs)/");
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        let metadata = user.user_metadata;
+
+        if (metadata.isAdmin) {
+          router.push("/(tabs)/");
+        } else {
+          router.push("/donor/");
+        }
       }
     };
     fetchUser();
@@ -58,13 +66,15 @@ export default function LoginScreen() {
         >
           Login
         </DCText>
-        <DCText textStyle={{
-          marginTop: 8,
-          fontSize: 13,
-          fontFamily: NunitoSansLight,
-          textAlign: "left",
-          color: "black",
-        }}>
+        <DCText
+          textStyle={{
+            marginTop: 8,
+            fontSize: 13,
+            fontFamily: NunitoSansLight,
+            textAlign: "left",
+            color: "black",
+          }}
+        >
           Welcome back to Davis Community! Please login to continue.
         </DCText>
       </View>

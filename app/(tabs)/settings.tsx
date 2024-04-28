@@ -10,6 +10,8 @@ import {
 import { Feather, Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
 import { DCButton } from "@/components/DCButton";
 import * as WebBrowser from "expo-web-browser";
+import { supabase } from "../lib/supabase";
+import { router } from "expo-router";
 
 export default function TabTwoScreen() {
   return (
@@ -136,7 +138,14 @@ export default function TabTwoScreen() {
             fontFamily: NunitoSansSemiBold,
             fontSize: 16,
           }}
-          onPress={() => {}}
+          onPress={() => {
+            async function signOut() {
+              const { error } = await supabase.auth.signOut();
+              if (error) console.log("Error logging out:", error.message);
+              else router.push("/");
+            }
+            signOut();
+          }}
         />
         <DCButton
           title="Delete Account"
@@ -153,7 +162,14 @@ export default function TabTwoScreen() {
             fontSize: 16,
             fontFamily: NunitoSans10ptBold,
           }}
-          onPress={() => {}}
+          onPress={() => {
+            async function deleteAccount() {
+              const { error } = await supabase.auth.signOut();
+              if (error) console.log("Error deleting account:", error.message);
+              else router.push("/");
+            }
+            deleteAccount();
+          }}
         />
       </View>
     </View>
