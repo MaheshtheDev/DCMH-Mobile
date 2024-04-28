@@ -135,6 +135,7 @@ export default function ModalScreen() {
                 Promise.all([updateInventory(), pushNotification()]).then(
                   () => {
                     router.back();
+                    setEdited(false);
                     Alert.alert("Inventory updated successfully");
                   }
                 );
@@ -172,6 +173,7 @@ export default function ModalScreen() {
                 textStyle={{
                   fontFamily: NunitoSansSemiBold,
                   fontSize: 20,
+                  textTransform: "capitalize",
                 }}
               >
                 {productDetails.inventory_name}
@@ -369,6 +371,57 @@ export default function ModalScreen() {
                 23rd Apr 2024 -{" "}
               </DCText>
               <DCText>5 units donated by John Doe</DCText>
+            </View>
+            <View
+              style={{
+                marginVertical: verticalScale(10),
+                flexDirection: "row",
+              }}
+            >
+              <DCText
+                textStyle={{
+                  fontFamily: NunitoSans,
+                  fontSize: 14,
+                  opacity: 0.5,
+                }}
+              >
+                20th Mar 2024 -{" "}
+              </DCText>
+              <DCText>10 units donated by Jacob Crews</DCText>
+            </View>
+            <View
+              style={{
+                marginVertical: verticalScale(10),
+                flexDirection: "row",
+              }}
+            >
+              <DCText
+                textStyle={{
+                  fontFamily: NunitoSans,
+                  fontSize: 14,
+                  opacity: 0.5,
+                }}
+              >
+                2nd Feb 2024 -{" "}
+              </DCText>
+              <DCText>15 units donated by Steve Smith</DCText>
+            </View>
+            <View
+              style={{
+                marginVertical: verticalScale(10),
+                flexDirection: "row",
+              }}
+            >
+              <DCText
+                textStyle={{
+                  fontFamily: NunitoSans,
+                  fontSize: 14,
+                  opacity: 0.5,
+                }}
+              >
+                12th Jan 2024 -{" "}
+              </DCText>
+              <DCText>10 units donated by Jake Paul</DCText>
             </View>
           </View>
         </>
