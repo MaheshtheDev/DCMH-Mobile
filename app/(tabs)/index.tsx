@@ -1,31 +1,48 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import { Text, View } from "@/components/Themed";
+import { DCText } from "@/components/DCText";
+import { NunitoSans10ptBold } from "@/styles";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/index.tsx" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          flexDirection: "column",
+          alignItems: "center",
+          paddingLeft: 10,
+          marginBottom: 5,
+        }}
+      >
+        <DCText
+          textStyle={{
+            fontSize: 20,
+            fontFamily: NunitoSans10ptBold,
+            textAlign: "auto",
+            color: "green",
+          }}
+        >
+          Davis Community Meals & Housing
+        </DCText>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
   },
 });
