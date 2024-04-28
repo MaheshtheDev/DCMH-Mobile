@@ -1,6 +1,6 @@
 import { DCButton } from "@/components/DCButton";
 import { DCText } from "@/components/DCText";
-import { horizontalScale, NunitoSans10ptBold, verticalScale } from "@/styles";
+import { horizontalScale, NunitoSans10ptBold, NunitoSansMedium, verticalScale } from "@/styles";
 import React, { useState } from "react";
 import { Alert, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { supabase } from "../lib/supabase";
@@ -118,7 +118,7 @@ export default function signUpScreen() {
               placeholder="Enter your phone number"
             />
           </View>
-          <View style={styles.fieldInputs}>
+          {/*<View style={styles.fieldInputs}>
             <DCText
               textStyle={{ fontSize: 16, fontFamily: NunitoSans10ptBold }}
             >
@@ -130,7 +130,7 @@ export default function signUpScreen() {
               onChangeText={(e) => setImageUri(e)}
               placeholder="Upload your profile picture"
             />
-          </View>
+          </View>*/}
         </View>
         <DCButton
           title="Sign Up"
@@ -165,10 +165,13 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   textInput: {
-    height: 45,
-    width: "100%",
-    borderRadius: 3,
-    borderWidth: 0.25,
-    paddingHorizontal: 6,
+    fontFamily: NunitoSansMedium,
+    height: verticalScale(40),
+    backgroundColor: "#F0F0F0",
+    paddingVertical: verticalScale(6),
+    paddingHorizontal: horizontalScale(10),
+    borderRadius: 4,
+    marginVertical: verticalScale(3),
+    fontSize: 14,
   },
 });

@@ -218,7 +218,7 @@ export default function index() {
       </View>
 
       <DCButton
-        title="LET'S MAKE CHANGE"
+        title="LET'S MAKE CHANGE →"
         onPress={() => {
           router.push("/auth/login");
         }}

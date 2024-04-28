@@ -1,13 +1,13 @@
 import { DCButton } from "@/components/DCButton";
 import { DCText } from "@/components/DCText";
-import { NunitoSans10ptBold } from "@/styles";
+import { NunitoSans10ptBold, NunitoSansLight, NunitoSansMedium } from "@/styles";
 import { horizontalScale, verticalScale } from "@/styles/metrics";
 import React, { useEffect, useState } from "react";
 import { Alert, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { supabase } from "../lib/supabase";
 import { Link, router } from "expo-router";
 
-export default function loginScreen() {
+export default function LoginScreen() {
   const [email, setEmail] = useState<String>("");
   const [password, setPassword] = useState<String>("");
 
@@ -42,20 +42,29 @@ export default function loginScreen() {
       <View
         style={{
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "flex-start",
           paddingLeft: 10,
-          marginBottom: 5,
+          marginVertical: verticalScale(10),
         }}
       >
         <DCText
           textStyle={{
-            fontSize: 20,
+            fontSize: 24,
             fontFamily: NunitoSans10ptBold,
-            textAlign: "auto",
+            textAlign: "left",
             color: "green",
           }}
         >
-          Davis Community Meals & Housing
+          Login
+        </DCText>
+        <DCText textStyle={{
+          marginTop: 8,
+          fontSize: 13,
+          fontFamily: NunitoSansLight,
+          textAlign: "left",
+          color: "black",
+        }}>
+          Welcome back to Davis Community! Please login to continue.
         </DCText>
       </View>
 
@@ -117,7 +126,7 @@ export default function loginScreen() {
             backgroundColor: "green",
             borderRadius: 100,
             padding: 10,
-            margin: 10,
+            margin: 20,
           }}
           textStyle={{
             textAlign: "center",
@@ -134,14 +143,17 @@ export default function loginScreen() {
 const styles = StyleSheet.create({
   fieldInputs: {
     flexDirection: "column",
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     marginTop: 25,
   },
   textInput: {
-    height: 45,
-    width: "100%",
-    borderRadius: 3,
-    borderWidth: 0.25,
-    paddingHorizontal: 6,
+    fontFamily: NunitoSansMedium,
+    height: verticalScale(40),
+    backgroundColor: "#F0F0F0",
+    paddingVertical: verticalScale(6),
+    paddingHorizontal: horizontalScale(10),
+    borderRadius: 4,
+    marginVertical: verticalScale(3),
+    fontSize: 14,
   },
 });

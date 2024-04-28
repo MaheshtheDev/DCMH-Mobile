@@ -12,6 +12,9 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors["light"].tint,
+        tabBarStyle: {
+          paddingTop: 5,
+        }
       }}
     >
       <Tabs.Screen
