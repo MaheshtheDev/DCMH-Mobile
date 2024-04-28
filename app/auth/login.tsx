@@ -18,8 +18,10 @@ export default function LoginScreen() {
   const onSubmitLogin = () => {
     const fetchUser = async () => {
       const { error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
+        // email: email,
+        // password: password,
+        email: "samratmalisetti@gmail.com",
+        password: "123456",
       });
       if (error) {
         Alert.alert(error.message);

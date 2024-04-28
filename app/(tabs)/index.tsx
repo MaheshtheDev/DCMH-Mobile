@@ -6,7 +6,6 @@ import { Text, View } from "react-native";
 import { DCText } from "@/components/DCText";
 import { NunitoSans10ptBold, horizontalScale, verticalScale } from "@/styles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Images } from "@/assets/images";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";

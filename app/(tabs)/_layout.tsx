@@ -1,9 +1,15 @@
 import React from "react";
 import { Link, Tabs } from "expo-router";
-import { Pressable } from "react-native";
+import { Pressable, StatusBar } from "react-native";
 
 import Colors from "@/constants/Colors";
-import { AntDesign, Entypo, Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Entypo,
+  Feather,
+  FontAwesome5,
+  Ionicons,
+} from "@expo/vector-icons";
 import { DCText } from "@/components/DCText";
 import { NunitoSans10ptBold } from "@/styles";
 
@@ -14,9 +20,10 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors["light"].tint,
         tabBarStyle: {
           paddingTop: 5,
-        }
+        },
       }}
     >
+      <StatusBar barStyle={"dark-content"} />
       <Tabs.Screen
         name="index"
         options={{
