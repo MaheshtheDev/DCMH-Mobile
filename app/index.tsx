@@ -152,7 +152,7 @@ export default function index() {
         </MaskedView>
         <View
           style={{
-            marginVertical: verticalScale(2),
+            marginVertical: verticalScale(4),
             flexDirection: "row",
             gap: 5,
             marginLeft: -20,
@@ -167,7 +167,7 @@ export default function index() {
         </View>
         <View
           style={{
-            marginVertical: verticalScale(2),
+            marginVertical: verticalScale(4),
             flexDirection: "row",
             gap: 5,
           }}
@@ -184,7 +184,7 @@ export default function index() {
         </View>
         <View
           style={{
-            marginVertical: verticalScale(2),
+            marginVertical: verticalScale(4),
             flexDirection: "row",
             gap: 5,
             marginLeft: -20,
@@ -202,7 +202,7 @@ export default function index() {
         </View>
         <View
           style={{
-            marginVertical: verticalScale(2),
+            marginVertical: verticalScale(4),
             flexDirection: "row",
             gap: 10,
             marginLeft: -10,
@@ -269,6 +269,6 @@ const styles = StyleSheet.create({
     paddingVertical: verticalScale(5),
     borderRadius: 100,
     opacity: 0.35,
-    backgroundColor: "white",
+    backgroundColor: "lightgrey",
   },
 });
