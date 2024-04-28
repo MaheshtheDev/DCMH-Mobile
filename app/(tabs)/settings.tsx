@@ -1,13 +1,15 @@
 import { StyleSheet } from "react-native";
-
-import { Image } from "expo-image";
-
-import { View } from "@/components/Themed";
+import { View } from "react-native";
 import { DCText } from "@/components/DCText";
-import { NunitoSans10ptBold, horizontalScale, verticalScale } from "@/styles";
+import {
+  NunitoSans10ptBold,
+  NunitoSansSemiBold,
+  horizontalScale,
+  verticalScale,
+} from "@/styles";
 import { Feather, Fontisto, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Images } from "@/assets/images";
 import { DCButton } from "@/components/DCButton";
+import * as WebBrowser from "expo-web-browser";
 
 export default function TabTwoScreen() {
   return (
@@ -18,17 +20,22 @@ export default function TabTwoScreen() {
           flexDirection: "row",
           paddingVertical: verticalScale(10),
           paddingHorizontal: horizontalScale(10),
+          backgroundColor: "lightblue",
+          marginVertical: verticalScale(10),
+          marginHorizontal: horizontalScale(10),
+          borderRadius: 5,
         }}
       >
-        <Image
-          source={Images.hope}
+        <Feather
+          name="user"
+          size={80}
+          color="black"
           style={{
             width: horizontalScale(75),
             height: verticalScale(75),
             borderRadius: 50,
           }}
         />
-
         <View
           style={{
             flexDirection: "column",
@@ -59,11 +66,93 @@ export default function TabTwoScreen() {
         </View>
       </View>
 
-      <View>
+      <View
+        style={{
+          marginHorizontal: horizontalScale(20),
+          marginVertical: verticalScale(10),
+        }}
+      >
+        <DCText
+          textStyle={{
+            fontSize: 16,
+            fontFamily: NunitoSans10ptBold,
+            marginVertical: verticalScale(5),
+          }}
+        >
+          More Options
+        </DCText>
         <DCButton
-          title="Donors"
-          buttonStyle={{}}
-          textStyle={{}}
+          title="Board of Directors"
+          buttonStyle={{
+            paddingVertical: verticalScale(2),
+          }}
+          textStyle={{
+            textDecorationLine: "underline",
+          }}
+          onPress={() => {
+            WebBrowser.openBrowserAsync(
+              "https://daviscommunitymeals.org/board-of-directors/"
+            );
+          }}
+        />
+        <DCButton
+          title="Staff"
+          buttonStyle={{
+            paddingVertical: verticalScale(2),
+          }}
+          textStyle={{
+            textDecorationLine: "underline",
+          }}
+          onPress={() => {
+            WebBrowser.openBrowserAsync(
+              "https://daviscommunitymeals.org/staff/"
+            );
+          }}
+        />
+        <DCButton
+          title="News"
+          buttonStyle={{
+            paddingVertical: verticalScale(2),
+          }}
+          textStyle={{
+            textDecorationLine: "underline",
+          }}
+          onPress={() => {
+            WebBrowser.openBrowserAsync(
+              "https://daviscommunitymeals.org/news/"
+            );
+          }}
+        />
+        <DCButton
+          title="Logout"
+          buttonStyle={{
+            paddingVertical: verticalScale(10),
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+          textStyle={{
+            textAlign: "center",
+            color: "red",
+            fontFamily: NunitoSansSemiBold,
+            fontSize: 16,
+          }}
+          onPress={() => {}}
+        />
+        <DCButton
+          title="Delete Account"
+          buttonStyle={{
+            paddingVertical: verticalScale(10),
+            backgroundColor: "red",
+            paddingHorizontal: horizontalScale(20),
+            borderRadius: 5,
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+          textStyle={{
+            color: "white",
+            fontSize: 16,
+            fontFamily: NunitoSans10ptBold,
+          }}
           onPress={() => {}}
         />
       </View>
@@ -74,6 +163,7 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   title: {
     fontSize: 20,

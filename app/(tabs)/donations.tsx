@@ -85,19 +85,20 @@ function PendingDonation() {
       <View
         style={{
           flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: "space-between",
           flexWrap: "wrap",
         }}
       >
         <Pressable style={styles.receivedButton}>
           <AntDesign name="checkcircle" size={20} color="white" />
-          <DCText textStyle={{ color: "white", marginLeft: verticalScale(4) }}>
+          <DCText textStyle={{ color: "white", marginLeft: verticalScale(6) }}>
             Received
           </DCText>
         </Pressable>
         <Pressable style={styles.cancelOrderButton}>
-          <DCText textStyle={{ color: "white", marginLeft: verticalScale(4) }}>
-            Order Cancelled
+          <AntDesign name="closecircle" size={20} color="white" />
+          <DCText textStyle={{ color: "white", marginLeft: verticalScale(4), textAlign: 'center' }}>
+            Cancelled
           </DCText>
         </Pressable>
       </View>
@@ -143,6 +144,10 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     marginVertical: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
+    paddingVertical: verticalScale(5),
     width: "45%",
   },
 });

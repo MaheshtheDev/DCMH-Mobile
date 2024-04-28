@@ -16,7 +16,7 @@ export default function TabOneScreen() {
       <View
         style={{
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "flex-start",
           paddingLeft: 10,
           marginBottom: 5,
         }}
@@ -29,7 +29,7 @@ export default function TabOneScreen() {
             color: "green",
           }}
         >
-          Davis Community Meals & Housing
+          Davis Community
         </DCText>
       </View>
 
