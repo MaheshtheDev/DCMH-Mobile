@@ -224,7 +224,7 @@ export default function SettingsScreen() {
             }}
           />
         </View>
-      </SafeAr>
+      </SafeAreaView>
     )
   );
 }
