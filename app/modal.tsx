@@ -181,7 +181,7 @@ export default function ModalScreen() {
                   fontFamily: NunitoSansMedium,
                 }}
               >
-                {/*{productDetails.description}*/}
+                {productDetails.description}
               </DCText>
               <View
                 style={{
