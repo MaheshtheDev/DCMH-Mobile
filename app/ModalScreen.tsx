@@ -8,18 +8,12 @@ import {
 } from "@/styles";
 import { Stack, router, useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Platform, StyleSheet, TextInput } from "react-native";
+import { Platform, TextInput, StyleSheet } from "react-native";
 import { Image } from "expo-image";
-
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Images } from "@/assets/images";
-import { Entypo, FontAwesome, MaterialIcons } from "@expo/vector-icons";
-
-export type ProductDetails = {
-  title: string;
-  image: string;
-  description: string;
-};
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { ProductDetails } from "./modal";
 
 export default function ModalScreen() {
   const { productId } = useLocalSearchParams<{
@@ -86,52 +80,26 @@ export default function ModalScreen() {
           >
             {productDetails.description}
           </DCText>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 5,
-            }}
-          >
-            <Entypo
-              name="back-in-time"
-              size={12}
-              color={"black"}
-              style={{
-                opacity: 0.5,
-              }}
-            />
-            <DCText
-              textStyle={{
-                fontFamily: NunitoSans,
-                fontSize: 12,
-                opacity: 0.5,
-                marginLeft: 5,
-              }}
-            >
-              Updated on 26th Apr
-            </DCText>
-          </View>
         </View>
       </View>
 
       <View
         style={{
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "space-between",
           marginHorizontal: horizontalScale(10),
         }}
       >
         <View
           style={{
-            backgroundColor: "black",
+            //backgroundColor: "black",
             borderRadius: 5,
             paddingHorizontal: horizontalScale(10),
             paddingVertical: verticalScale(5),
-            flexDirection: "column",
+            flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            minWidth: "48%",
+            //width: "48%",
           }}
         >
           <DCText
@@ -141,7 +109,7 @@ export default function ModalScreen() {
               color: "white",
             }}
           >
-            Available Stock
+            Quantity
           </DCText>
 
           <View
@@ -150,14 +118,14 @@ export default function ModalScreen() {
               alignItems: "center",
             }}
           >
-            <FontAwesome name="minus-square" size={32} color="red" />
+            <FontAwesome name="minus-square" size={20} color="red" />
             <TextInput
               value="5"
               style={{
-                width: 25,
+                width: 15,
                 textAlign: "center",
                 fontFamily: NunitoSans,
-                fontSize: 24,
+                fontSize: 20,
                 borderColor: "grey",
                 //borderWidth: 1,
                 borderRadius: 5,
@@ -165,7 +133,7 @@ export default function ModalScreen() {
                 color: "white",
               }}
             ></TextInput>
-            <FontAwesome name="plus-square" size={32} color="white" />
+            <FontAwesome name="plus-square" size={20} color="white" />
           </View>
         </View>
 
@@ -173,12 +141,13 @@ export default function ModalScreen() {
           style={{
             minWidth: "45%",
             alignItems: "center",
-            flexDirection: "column",
+            flexDirection: "row",
             justifyContent: "space-between",
             backgroundColor: "green",
             borderRadius: 5,
             paddingHorizontal: horizontalScale(10),
             paddingVertical: verticalScale(5),
+            marginTop: verticalScale(10),
           }}
         >
           <DCText
@@ -202,7 +171,9 @@ export default function ModalScreen() {
               style={{
                 textAlign: "center",
                 fontFamily: NunitoSans,
-                fontSize: 24,
+                fontSize: 20,
+                borderColor: "grey",
+                //borderWidth: 1,
                 borderRadius: 5,
                 color: "white",
               }}
@@ -210,48 +181,30 @@ export default function ModalScreen() {
           </View>
         </View>
       </View>
+
       <View
         style={{
           marginHorizontal: horizontalScale(10),
+          borderBottomWidth: 1,
+          borderBottomColor: "black",
         }}
       >
-        <View
-          style={{
-            borderBottomWidth: 1,
-            borderBottomColor: "black",
+        <DCText
+          textStyle={{
+            fontFamily: NunitoSansSemiBold,
+            fontSize: 16,
+            marginTop: verticalScale(10),
           }}
         >
-          <DCText
-            textStyle={{
-              fontFamily: NunitoSansSemiBold,
-              fontSize: 16,
-              marginTop: verticalScale(10),
-            }}
-          >
-            Donation History
-          </DCText>
-        </View>
-
-        {/* TODO: Add flashlist of donations history */}
-        <View
-          style={{
-            marginVertical: verticalScale(10),
-            flexDirection: "row"
-          }}
-        >
-          <DCText textStyle={{
-            fontFamily: NunitoSans,
-            fontSize: 14,
-            opacity: 0.5
-          }}>23rd Apr 2024 - </DCText>
-          <DCText>5 units donated by John Doe</DCText>
-        </View>
+          Donation History
+        </DCText>
       </View>
 
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

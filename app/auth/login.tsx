@@ -2,6 +2,7 @@ import { DCButton } from "@/components/DCButton";
 import { DCText } from "@/components/DCText";
 import { NunitoSans10ptBold } from "@/styles";
 import { horizontalScale, verticalScale } from "@/styles/metrics";
+import { router } from "expo-router";
 import React from "react";
 import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 
@@ -85,7 +86,9 @@ export default function loginScreen() {
         </View>
         <DCButton
           title="Login"
-          onPress={() => {}}
+          onPress={() => {
+            router.push("/(tabs)/");
+          }}
           buttonStyle={{
             backgroundColor: "green",
             borderRadius: 100,
