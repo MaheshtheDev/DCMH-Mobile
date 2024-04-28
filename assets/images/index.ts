@@ -3,4 +3,5 @@ export const Images = {
     hope: require("./hope.png"),
     shelter: require("./shelter.png"),
     donate: require("./donate.png"),
+    icon: require("./icon.png"),
 }

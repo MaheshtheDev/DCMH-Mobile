@@ -61,9 +61,10 @@ export default function index() {
   return (
     <SafeAreaView
       style={{
-        marginVertical: verticalScale(20),
-        marginHorizontal: horizontalScale(15),
+        paddingVertical: verticalScale(20),
+        paddingHorizontal: horizontalScale(15),
         flex: 1,
+        backgroundColor: "white",
       }}
     >
       <View
@@ -71,24 +72,15 @@ export default function index() {
           flex: 1,
         }}
       >
-        <View>
-          <View style={styles.flexRow}>
-            <DCText textStyle={styles.firstFontSize}>D</DCText>
-            <DCText textStyle={styles.titleSecondFontSize}>avis</DCText>
-          </View>
-          <View style={styles.flexRow}>
-            <DCText textStyle={styles.firstFontSize}>C</DCText>
-            <DCText textStyle={styles.titleSecondFontSize}>ommunity</DCText>
-          </View>
-          <View style={styles.flexRow}>
-            <DCText textStyle={styles.firstFontSize}>M</DCText>
-            <DCText textStyle={styles.titleSecondFontSize}>eals &</DCText>
-          </View>
-          <View style={styles.flexRow}>
-            <DCText textStyle={styles.firstFontSize}>H</DCText>
-            <DCText textStyle={styles.titleSecondFontSize}>ousing</DCText>
-          </View>
-        </View>
+        <Image
+          source={Images.icon}
+          style={{
+            width: 200,
+            height: 150,
+            margin: 10,
+            alignSelf: "center",
+          }}
+        ></Image>
         <View
           style={{
             flexDirection: "row",
