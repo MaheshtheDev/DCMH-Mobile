@@ -2,11 +2,35 @@ import { DCButton } from "@/components/DCButton";
 import { DCText } from "@/components/DCText";
 import { NunitoSans10ptBold } from "@/styles";
 import { horizontalScale, verticalScale } from "@/styles/metrics";
-import { router } from "expo-router";
-import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Alert, SafeAreaView, StyleSheet, TextInput, View } from "react-native";
+import { supabase } from "../lib/supabase";
+import { Link } from "expo-router";
 
 export default function loginScreen() {
+  const [email, setEmail] = useState<String>("");
+  const [password, setPassword] = useState<String>("");
+
+  const onSubmitLogin = () => {
+    const fetchUser = async () => {
+      let { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("email_id", email);
+      if (error) {
+        Alert.alert("Error found !!");
+      }
+      console.log(data);
+      if (data?.length == 0) {
+        Alert.alert("User Not Found! Please SignUp");
+      } else {
+        // TODO - redirect to the Home Page...
+        Alert.alert("Login Success !");
+      }
+    };
+    fetchUser();
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -48,9 +72,9 @@ export default function loginScreen() {
           </DCText>
           <TextInput
             style={styles.textInput}
-            value={""}
+            value={email}
             placeholder="Enter your Email ID"
-            onChange={() => {}}
+            onChangeText={(e) => setEmail(e)}
           />
         </View>
         <View style={styles.fieldInputs}>
@@ -59,9 +83,10 @@ export default function loginScreen() {
           </DCText>
           <TextInput
             style={styles.textInput}
-            value={""}
+            value={password}
+            secureTextEntry={true}
             placeholder="Enter Your Password"
-            onChange={() => {}}
+            onChangeText={(e) => setPassword(e)}
           />
         </View>
       </View>
@@ -74,21 +99,21 @@ export default function loginScreen() {
           }}
         >
           <DCText textStyle={{ fontSize: 14 }}>{"No Account? "}</DCText>
-          <DCText
-            textStyle={{
-              fontSize: 14,
-              opacity: 0.75,
-              color: "#4200FF",
-            }}
-          >
-            {"Create One"}
-          </DCText>
+          <Link href={"/auth/signup"}>
+            <DCText
+              textStyle={{
+                fontSize: 14,
+                opacity: 0.75,
+                color: "#4200FF",
+              }}
+            >
+              {"Create One"}
+            </DCText>
+          </Link>
         </View>
         <DCButton
           title="Login"
-          onPress={() => {
-            router.push("/(tabs)/");
-          }}
+          onPress={() => onSubmitLogin()}
           buttonStyle={{
             backgroundColor: "green",
             borderRadius: 100,
