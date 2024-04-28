@@ -56,11 +56,12 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen
           name="index"
-          options={{ headerShown: false, headerBackButtonMenuEnabled: false }}
+          options={{ headerShown: false, headerBackButtonMenuEnabled: false, gestureEnabled: false}}
         />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, gestureEnabled: false }} />
         <Stack.Screen name="donor" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        <Stack.Screen name="donorModal" options={{ presentation: "modal" }} />
         <Stack.Screen name="auth" options={{ headerShown: false }} />
       </Stack>
     </SafeAreaProvider>

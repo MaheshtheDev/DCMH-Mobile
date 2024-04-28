@@ -59,6 +59,7 @@ export default function signUpScreen() {
           first_name: firstName,
           last_name: lastName,
           isAdmin: false,
+          phoneNumber: phoneNumber,
         },
       },
     });

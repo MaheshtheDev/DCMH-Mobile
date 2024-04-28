@@ -2,6 +2,8 @@ import { Alert, Pressable, ScrollView, StyleSheet } from "react-native";
 
 import { Image } from "expo-image";
 
+import * as Linking from "expo-linking";
+
 import { Text, View } from "react-native";
 import { DCText } from "@/components/DCText";
 import { NunitoSans10ptBold, horizontalScale, verticalScale } from "@/styles";
@@ -33,7 +35,6 @@ export default function DonorsHomeScreen() {
         data: { user },
       } = await supabase.auth.getUser();
       let metadata = user.user_metadata;
-
     };
     fetchUserData();
     const fetchInventory = async () => {
@@ -42,8 +43,21 @@ export default function DonorsHomeScreen() {
         Alert.alert("Error fetching Inventory");
       }
       // console.log(data, "Consoleeee");
+      if (data & (data.length == 0)) {
+        return;
+      }
       setInventory(data);
-      setFilteredInventory(data.filter((item) => item.category_id === 1));
+      setFilteredInventory(
+        data
+          .filter((item) => item.category_id === 1)
+          .sort((a, b) => {
+            return a.available_quantity / a.max_quantity >
+              b.available_quantity / b.max_quantity
+              ? 1
+              : -1;
+          })
+          .filter((item) => item.available_quantity / item.max_quantity < 0.9)
+      );
     };
     fetchInventory();
   }
@@ -52,9 +66,10 @@ export default function DonorsHomeScreen() {
     <SafeAreaView style={styles.container}>
       <View
         style={{
-          flexDirection: "column",
+          flexDirection: "row",
           alignItems: "flex-start",
-          paddingLeft: 10,
+          justifyContent: "space-between",
+          paddingHorizontal: horizontalScale(15),
           marginBottom: 5,
         }}
       >
@@ -68,8 +83,37 @@ export default function DonorsHomeScreen() {
         >
           Davis Community
         </DCText>
+        <Image
+          source={Images.donate}
+          style={{
+            width: 25,
+            height: 25,
+            resizeMode: "contain",
+            alignContent: "center",
+          }}
+          onTouchEnd={() => {
+            Alert.alert(
+              "Donate to DCMH",
+              "Support Davis Community Meals and Housing with a donation.",
+              [
+                {
+                  text: "Cancel",
+                  style: "cancel",
+                },
+                {
+                  text: "Donate",
+                  style: "default",
+                  onPress: () => {
+                    Linking.openURL(
+                      "https://interland3.donorperfect.net/weblink/weblink.aspx?name=E357416&id=1"
+                    );
+                  },
+                },
+              ]
+            );
+          }}
+        ></Image>
       </View>
-
       <View
         style={{
           flexDirection: "row",
@@ -91,7 +135,17 @@ export default function DonorsHomeScreen() {
             onPress={() => {
               setSelectedFilter(0);
               setFilteredInventory(
-                inventory.filter((item) => item.category_id === 1)
+                inventory
+                  .filter((item) => item.category_id === 1)
+                  .sort((a, b) => {
+                    return a.available_quantity / a.max_quantity >
+                      b.available_quantity / b.max_quantity
+                      ? 1
+                      : -1;
+                  })
+                  .filter(
+                    (item) => item.available_quantity / item.max_quantity < 0.9
+                  )
               );
             }}
             buttonStyle={
@@ -108,7 +162,17 @@ export default function DonorsHomeScreen() {
             onPress={() => {
               setSelectedFilter(1);
               setFilteredInventory(
-                inventory.filter((item) => item.category_id === 2)
+                inventory
+                  .filter((item) => item.category_id === 2)
+                  .sort((a, b) => {
+                    return a.available_quantity / a.max_quantity >
+                      b.available_quantity / b.max_quantity
+                      ? 1
+                      : -1;
+                  })
+                  .filter(
+                    (item) => item.available_quantity / item.max_quantity < 0.9
+                  )
               );
             }}
             buttonStyle={
@@ -125,7 +189,17 @@ export default function DonorsHomeScreen() {
             onPress={() => {
               setSelectedFilter(2);
               setFilteredInventory(
-                inventory.filter((item) => item.category_id === 3)
+                inventory
+                  .filter((item) => item.category_id === 3)
+                  .sort((a, b) => {
+                    return a.available_quantity / a.max_quantity >
+                      b.available_quantity / b.max_quantity
+                      ? 1
+                      : -1;
+                  })
+                  .filter(
+                    (item) => item.available_quantity / item.max_quantity < 0.9
+                  )
               );
             }}
             buttonStyle={
@@ -142,7 +216,17 @@ export default function DonorsHomeScreen() {
             onPress={() => {
               setSelectedFilter(3);
               setFilteredInventory(
-                inventory.filter((item) => item.category_id === 4)
+                inventory
+                  .filter((item) => item.category_id === 4)
+                  .sort((a, b) => {
+                    return a.available_quantity / a.max_quantity >
+                      b.available_quantity / b.max_quantity
+                      ? 1
+                      : -1;
+                  })
+                  .filter(
+                    (item) => item.available_quantity / item.max_quantity < 0.9
+                  )
               );
             }}
             buttonStyle={
@@ -164,14 +248,6 @@ export default function DonorsHomeScreen() {
             title={item.inventory_name}
             image={item.image_url}
             item={item}
-            onPress={() =>
-              router.push({
-                pathname: "/modal",
-                params: {
-                  productId: item.id,
-                },
-              })
-            }
           />
         )}
         estimatedItemSize={100}
@@ -184,23 +260,21 @@ function ItemTile({
   title,
   image,
   item,
-  onPress,
   style,
   ...props
 }: {
   title: string;
   image: string;
   item: any;
-  onPress: () => void;
   style?: any;
   props?: any;
 }) {
   const [stage, setStage] = useState(0);
+  const router = useRouter();
 
   function getStockDetail() {
     const ratio = item.available_quantity / item.max_quantity;
-    console.log(ratio);
-    if (ratio >= 0.7) {
+    if (ratio >= 0.9) {
       //return "In Stock";
       setStage(0);
     } else if (ratio >= 0.4) {
@@ -218,7 +292,21 @@ function ItemTile({
 
   return (
     <Pressable
-      onPress={onPress}
+      onPress={() => {
+        if (stage == 0) {
+          Alert.alert(
+            title + "are in Stock!",
+            "Please donate other items, if possible."
+          );
+        } else {
+          router.push({
+            pathname: "/donorModal",
+            params: {
+              productId: item.id,
+            },
+          });
+        }
+      }}
       style={{
         backgroundColor: "white",
         marginVertical: verticalScale(3),
@@ -305,7 +393,7 @@ function ItemTile({
                 width: "100%",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "yellow",
+                backgroundColor: "orange",
                 borderEndEndRadius: 5,
                 borderBottomStartRadius: 5,
                 padding: 5,

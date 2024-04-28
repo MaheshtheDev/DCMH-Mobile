@@ -76,7 +76,10 @@ export default function ModalScreen() {
                 async function updateInventory() {
                   const { data, error } = await supabase
                     .from("inventory")
-                    .update({ available_quantity: productDetails.available_quantity.toString() })
+                    .update({
+                      available_quantity:
+                        productDetails.available_quantity.toString(),
+                    })
                     .eq("id", productId)
                     .select();
 
@@ -90,6 +93,39 @@ export default function ModalScreen() {
                 }
                 updateInventory();
 
+                //TODO: Push notification to all donors
+                async function pushNotification() {
+                  const { data, error } = await supabase
+                    .from("profiles")
+                    .select("auth_token")
+                    .eq("role", "donor");
+
+                  if (error) {
+                    console.log("Error fetching donor details");
+                    return;
+                  }
+
+                  data.forEach(async (donor) => {
+                    const message = {
+                      sound: "default",
+                      title: "Need your Help",
+                      body:
+                        "DCMH needs your help. The inventory for " +
+                        productDetails.inventory_name +
+                        " is almost out of stock.",
+                      to: donor.auth_token,
+                    };
+                    await fetch("https://exp.host/--/api/v2/push/send", {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                        "Accept-encoding": "gzip, deflate",
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(message),
+                    });
+                  });
+                }
               }}
               buttonStyle={{
                 backgroundColor: "black",

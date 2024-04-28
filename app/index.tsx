@@ -16,10 +16,11 @@ import {
   verticalScale,
 } from "@/styles";
 import { Images } from "@/assets/images";
-import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
 import { supabase } from "./lib/supabase";
 import { Session } from "@supabase/supabase-js";
+import { LinearTextGradient } from "react-native-text-gradient";
+import MaskedView from "@react-native-masked-view/masked-view";
+import { LinearGradient } from "expo-linear-gradient";
 
 ErrorUtils.setGlobalHandler((error, isFatal) => {
   // Handle the error
@@ -52,7 +53,7 @@ export default function index() {
       setSession(session);
     });
 
-    if(session) {
+    if (session) {
       router.push("/(tabs)/");
     }
   }, []);
@@ -135,17 +136,28 @@ export default function index() {
             <DCText>Shelter</DCText>
           </View>
         </View>
-        <DCText
-          textStyle={{
-            fontSize: 16,
-            fontFamily: NunitoSans10ptBold,
-            textAlign: "center",
-            marginVertical: verticalScale(20),
-            opacity: 0.5,
-          }}
+        <MaskedView
+          style={{ height: 24, marginVertical: verticalScale(20) }}
+          maskElement={
+            <DCText
+              textStyle={{
+                fontSize: 16,
+                fontFamily: NunitoSans10ptBold,
+                textAlign: "center",
+                //marginVertical: verticalScale(20),
+              }}
+            >
+              HELPING PEOPLE IN NEED SINCE 1991
+            </DCText>
+          }
         >
-          HELPING PEOPLE IN NEED SINCE 1991
-        </DCText>
+          <LinearGradient
+            colors={["blue", "#B16464"]}
+            start={{ x: 1, y: 1 }}
+            end={{ x: 0, y: 0.33 }}
+            style={{ flex: 1 }}
+          />
+        </MaskedView>
         <View
           style={{
             marginVertical: verticalScale(2),
@@ -251,8 +263,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   imageStyle: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     margin: 10,
   },
   maskedView: {
