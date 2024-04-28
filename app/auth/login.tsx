@@ -121,15 +121,13 @@ export default function LoginScreen() {
           .then((token: string) => {
             // Update the user's push token
             const updateUser = async () => {
-              const { data, error } = await supabase
-                .from("profiles")
-                .insert([
-                  {
-                    user_id: user.id,
-                    auth_token: token,
-                    role: metadata.isAdmin ? "admin" : "donor",
-                  },
-                ]);
+              const { data, error } = await supabase.from("profiles").insert([
+                {
+                  user_id: user.id,
+                  auth_token: token,
+                  role: metadata.isAdmin ? "admin" : "donor",
+                },
+              ]);
               if (error) {
                 console.log("Error updating user");
                 console.log(error);
