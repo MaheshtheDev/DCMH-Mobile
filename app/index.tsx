@@ -62,7 +62,7 @@ export default function index() {
     <SafeAreaView
       style={{
         marginVertical: verticalScale(20),
-        marginHorizontal: verticalScale(15),
+        marginHorizontal: horizontalScale(15),
         flex: 1,
       }}
     >
@@ -218,9 +218,9 @@ export default function index() {
       </View>
 
       <DCButton
-        title="LET'S MAKE CHANGE →"
+        title="LET'S MAKE CHANGE"
         onPress={() => {
-          router.push("/(tabs)/")
+          router.push("/auth/login");
         }}
         buttonStyle={{
           backgroundColor: "black",
