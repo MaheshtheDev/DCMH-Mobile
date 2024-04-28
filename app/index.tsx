@@ -2,18 +2,22 @@ import { useEffect } from "react";
 
 import { useRouter } from "expo-router";
 import * as Notifications from "expo-notifications";
+import { Image } from "expo-image";
 
 //import { TempStorage, TempStorageKeys, useUserStore } from "@/store";
 import { Button, SafeAreaView, View, Text, StyleSheet } from "react-native";
 import { DCText } from "@/components/DCText";
 import { DCButton } from "@/components/DCButton";
 import {
-  horizontalScale,
   NunitoSans10ptBold,
   NunitoSansBold,
   NunitoSansExtraBold,
+  horizontalScale,
   verticalScale,
 } from "@/styles";
+import { Images } from "@/assets/images";
+import { LinearGradient } from "expo-linear-gradient";
+import MaskedView from "@react-native-masked-view/masked-view";
 
 ErrorUtils.setGlobalHandler((error, isFatal) => {
   // Handle the error
@@ -59,26 +63,160 @@ export default function index() {
       style={{
         marginVertical: verticalScale(20),
         marginHorizontal: horizontalScale(15),
+        flex: 1,
       }}
     >
-      <View>
-        <View style={styles.flexRow}>
-          <DCText textStyle={styles.firstFontSize}>D</DCText>
-          <DCText textStyle={styles.titleSecondFontSize}>avis</DCText>
+      <View
+        style={{
+          flex: 1,
+        }}
+      >
+        <View>
+          <View style={styles.flexRow}>
+            <DCText textStyle={styles.firstFontSize}>D</DCText>
+            <DCText textStyle={styles.titleSecondFontSize}>avis</DCText>
+          </View>
+          <View style={styles.flexRow}>
+            <DCText textStyle={styles.firstFontSize}>C</DCText>
+            <DCText textStyle={styles.titleSecondFontSize}>ommunity</DCText>
+          </View>
+          <View style={styles.flexRow}>
+            <DCText textStyle={styles.firstFontSize}>M</DCText>
+            <DCText textStyle={styles.titleSecondFontSize}>eals &</DCText>
+          </View>
+          <View style={styles.flexRow}>
+            <DCText textStyle={styles.firstFontSize}>H</DCText>
+            <DCText textStyle={styles.titleSecondFontSize}>ousing</DCText>
+          </View>
         </View>
-        <View style={styles.flexRow}>
-          <DCText textStyle={styles.firstFontSize}>C</DCText>
-          <DCText textStyle={styles.titleSecondFontSize}>ommunity</DCText>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-around",
+            marginVertical: verticalScale(20),
+          }}
+        >
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              source={Images.food}
+              contentFit="fill"
+              style={styles.imageStyle}
+            />
+            <DCText>Food</DCText>
+          </View>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              source={Images.hope}
+              contentFit="fill"
+              style={styles.imageStyle}
+            />
+            <DCText>Hope</DCText>
+          </View>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              source={Images.shelter}
+              contentFit="fill"
+              style={styles.imageStyle}
+            />
+            <DCText>Shelter</DCText>
+          </View>
         </View>
-        <View style={styles.flexRow}>
-          <DCText textStyle={styles.firstFontSize}>M</DCText>
-          <DCText textStyle={styles.titleSecondFontSize}>eals &</DCText>
+        <DCText
+          textStyle={{
+            fontSize: 16,
+            fontFamily: NunitoSans10ptBold,
+            textAlign: "center",
+            marginVertical: verticalScale(20),
+            opacity: 0.5,
+          }}
+        >
+          HELPING PEOPLE IN NEED SINCE 1991
+        </DCText>
+        <View
+          style={{
+            marginVertical: verticalScale(2),
+            flexDirection: "row",
+            gap: 5,
+            marginLeft: -20,
+          }}
+        >
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Transitional and Bridge</DCText>
+          </View>
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Resource Center and Day</DCText>
+          </View>
         </View>
-        <View style={styles.flexRow}>
-          <DCText textStyle={styles.firstFontSize}>H</DCText>
-          <DCText textStyle={styles.titleSecondFontSize}>ousing</DCText>
+        <View
+          style={{
+            marginVertical: verticalScale(2),
+            flexDirection: "row",
+            gap: 5,
+          }}
+        >
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Housing</DCText>
+          </View>
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Family Housing</DCText>
+          </View>
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Pathways to Employment</DCText>
+          </View>
+        </View>
+        <View
+          style={{
+            marginVertical: verticalScale(2),
+            flexDirection: "row",
+            gap: 5,
+            marginLeft: -20,
+          }}
+        >
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Creekside</DCText>
+          </View>
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Meals Program</DCText>
+          </View>
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Permanent Supportive</DCText>
+          </View>
+        </View>
+        <View
+          style={{
+            marginVertical: verticalScale(2),
+            flexDirection: "row",
+            gap: 10,
+            marginLeft: -10,
+          }}
+        >
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Street Outreach</DCText>
+          </View>
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Shelter</DCText>
+          </View>
+          <View style={styles.programsView}>
+            <DCText textStyle={{}}>Housing-Cesar Chavez</DCText>
+          </View>
         </View>
       </View>
+
       <DCButton
         title="LET'S MAKE CHANGE"
         onPress={() => {
@@ -107,10 +245,27 @@ const styles = StyleSheet.create({
     alignItems: "baseline",
   },
   firstFontSize: {
-    fontSize: 28,
+    fontSize: 36,
     fontFamily: NunitoSans10ptBold,
   },
   titleSecondFontSize: {
-    fontSize: 20,
+    fontSize: 24,
+  },
+  imageStyle: {
+    width: 40,
+    height: 40,
+    margin: 10,
+  },
+  maskedView: {
+    height: 30, // Set the height to the height of the text
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  programsView: {
+    paddingHorizontal: horizontalScale(10),
+    paddingVertical: verticalScale(5),
+    borderRadius: 100,
+    opacity: 0.35,
+    backgroundColor: "white",
   },
 });
