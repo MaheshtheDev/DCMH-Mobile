@@ -1,20 +1,20 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
 
-import { StatusBar } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
-} from 'expo-router';
+} from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: "index",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -22,9 +22,15 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
+    "NunitoSans-Regular": require("../assets/fonts/NunitoSans_7pt-Regular.ttf"),
+    "NunitoSans-Light": require("../assets/fonts/NunitoSans_7pt-Light.ttf"),
+    "NunitoSans-Medium": require("../assets/fonts/NunitoSans_7pt-Medium.ttf"),
+    "NunitoSans-SemiBold": require("../assets/fonts/NunitoSans_7pt-SemiBold.ttf"),
+    "NunitoSans-Bold": require("../assets/fonts/NunitoSans_7pt-Bold.ttf"),
+    "NunitoSans-ExtraBold": require("../assets/fonts/NunitoSans_7pt-ExtraBold.ttf"),
+    "NunitoSans_10pt-Bold": require("../assets/fonts/NunitoSans_10pt-Bold.ttf"),
   });
+
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -45,11 +51,11 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={"light-content"} />
+      <StatusBar barStyle={"default"} />
       <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
       </Stack>
