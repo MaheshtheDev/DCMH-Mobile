@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Alert, Pressable, StyleSheet } from "react-native";
 
 import { Image } from "expo-image";
 
@@ -8,9 +8,27 @@ import { NunitoSans10ptBold, horizontalScale, verticalScale } from "@/styles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Images } from "@/assets/images";
 import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+import { FlashList } from "@shopify/flash-list";
 
 export default function TabOneScreen() {
   const router = useRouter();
+
+  const [inventory, setInventory] = useState([]);
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      let { data, error } = await supabase.from("inventory").select("*");
+      if (error) {
+        Alert.alert("Error fetching Inventory");
+      }
+      // console.log(data, "Consoleeee");
+      setInventory(data);
+    };
+    fetchInventory();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -33,44 +51,36 @@ export default function TabOneScreen() {
         </DCText>
       </View>
 
-      <View
-        style={{
-          marginTop: verticalScale(5),
-          marginHorizontal: horizontalScale(10),
-          flexDirection: "row",
-          justifyContent: "space-around",
-          gap: 5,
-          flexWrap: "wrap",
-        }}
-      >
-        <ItemTile
-          title="Food"
-          image={Images.food}
-          onPress={() =>
-            router.push({
-              pathname: "/modal",
-              params: {
-                productId: "2",
-              },
-            })
-          }
-        />
-        <ItemTile
-          title="Bowls"
-          image={Images.hope}
-          onPress={() => console.log("Housing")}
-        />
-        <ItemTile
-          title="Plates"
-          image={Images.hope}
-          onPress={() => console.log("Housing")}
-        />
-        <ItemTile
-          title="Cereal"
-          image={Images.hope}
-          onPress={() => console.log("Housing")}
-        />
-      </View>
+      <FlashList
+        data={inventory}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <View
+            style={{
+              marginTop: verticalScale(5),
+              marginHorizontal: horizontalScale(10),
+              flexDirection: "row",
+              justifyContent: "space-around",
+              gap: 5,
+              flexWrap: "wrap",
+            }}
+          >
+            <ItemTile
+              title={item.inventory_name}
+              image={item.image_url}
+              onPress={() =>
+                router.push({
+                  pathname: "/modal",
+                  params: {
+                    productId: "2",
+                  },
+                })
+              }
+            />
+          </View>
+        )}
+        estimatedItemSize={100}
+      />
     </SafeAreaView>
   );
 }
@@ -95,7 +105,7 @@ function ItemTile({
         backgroundColor: "white",
         marginVertical: verticalScale(3),
         borderRadius: 10,
-        minWidth: "45%",
+        minWidth: "95%",
         alignItems: "flex-start",
       }}
     >
@@ -180,6 +190,6 @@ const styles = StyleSheet.create({
   separator: {
     marginVertical: 30,
     height: 1,
-    width: "80%",
+    width: "90%",
   },
 });

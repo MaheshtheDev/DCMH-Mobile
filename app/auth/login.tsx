@@ -16,7 +16,8 @@ export default function loginScreen() {
       let { data, error } = await supabase
         .from("users")
         .select("*")
-        .eq("email_id", email);
+        .eq("email_id", email)
+        .eq("password", password);
       if (error) {
         Alert.alert("Error found !!");
       }
